@@ -87,7 +87,7 @@ def send_slack_notification(old_version, new_version):
 
     message = {
         "text": (
-            "🚀 *Elastic Beanstalk Docker AL2023 Updated*\n\n"
+            "📢 *Elastic Beanstalk Docker AL2023 Updated*\n\n"
             f"*Previous Version:* `{old_version}`\n"
             f"*New Version:* `{new_version}`\n\n"
             f"<{DOCKER_AL2023_ANCHOR}|View Docker AL2023 Supported Platforms>\n"
