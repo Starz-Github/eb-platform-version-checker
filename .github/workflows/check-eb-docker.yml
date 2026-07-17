@@ -32,6 +32,7 @@ jobs:
         run: python check_version.py
 
       - name: Commit updated version
+        if: success()
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -44,3 +45,14 @@ jobs:
           git add version.txt
           git commit -m "Update tracked Docker AL2023 version"
           git push
+
+      - name: Notify Slack on Failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          curl -X POST \
+          -H 'Content-type: application/json' \
+          --data "{\"text\":\"❌ *Elastic Beanstalk Docker AL2023 Workflow Failed*\\n\\nWorkflow failed with error. Please check Workflow in GitHub for details.\\n\\n<$GITHUB_RUN_URL|View Failed Workflow Run>\"}" \
+          $SLACK_WEBHOOK_URL
