@@ -1,10 +1,8 @@
-```python
 import os
 import re
 
 import requests
 from bs4 import BeautifulSoup
-
 
 SUPPORTED_PLATFORMS_URL = (
     "https://docs.aws.amazon.com/elasticbeanstalk/latest/"
@@ -137,5 +135,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
